@@ -6,14 +6,14 @@ class UserHelper:
     def __init__(self):
         self.db = OracleDb()
 
-    def getMessageData(self, text_mes=None):
+    def getUserData(self, user_phone=None):
 
-        if text_mes:
-            text_mes="'{0}'".format(text_mes)
+        if user_phone:
+            user_phone="'{0}'".format(user_phone)
         else:
-            text_mes='null'
+            user_phone='null'
 
-        query = "select * from table(orm_user_phone.GetMessageData({0}))".format(text_mes)
+        query = "select * from table(orm_user_phone.GetUserData({0}))".format(user_phone)
 
         result = self.db.execute(query)
         return result.fetchall()
@@ -25,5 +25,5 @@ if __name__ == "__main__":
 
     helper = UserHelper()
 
-    print(helper.getMessageData('Java'))
-    print(helper.getMessageData())
+    print(helper.getUserData('Java'))
+    print(helper.getUserData())
