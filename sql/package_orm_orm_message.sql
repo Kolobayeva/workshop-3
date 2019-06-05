@@ -1,61 +1,59 @@
-CREATE OR REPLACE PACKAGE orm_message IS
+CREATE OR REPLACE PACKAGE orm_board IS
 
 
-    TYPE orm_message IS RECORD(
-        orm_user orm_message.textmes%TYPE,
-        users_count INTEGER
+    TYPE message_data IS RECORD(
+         time_send ORM_MESSAGE.TIME_SEND%TYPE,
+         message_count INTEGER
     );
 
 
-    TYPE tbls IS TABLE OF mess_data;
+    TYPE tbls IS TABLE OF message_data;
 
-    FUNCTION GetMesData (text_mes orm_message.txtmes%TYPE default null)
-        RETURN tblmesdata
+    FUNCTION GetMessageData ( time_send ORM_MESSAGE.TIME_SEND%TYPE default null)
+        RETURN tblmessagedata
         PIPELINED;
 
-END orm_message;
+END orm_board;
 
 
 
 
-CREATE OR REPLACE PACKAGE BODY orm_message IS
+CREATE OR REPLACE PACKAGE BODY orm_board IS
 
-    FUNCTION GetMesData (text_mes orm_message.text_mes%TYPE default null)
-    RETURN tblsmesdata
+    FUNCTION GetMessageData (time_send ORM_MESSAGE.TIME_SEND%TYPE default null)
+    RETURN tblmessagedata
     PIPELINED
     IS
 
-        TYPE mes IS REF mes_user;
-        mes_user  mes;
+        TYPE message_cursor_type IS REF CURSOR;
+        message_cursor  message_cursor_type;
 
-        mes_data mes_data;
+        cursor_data message_data ;
         query_str varchar2(1000);
 
-    begin
-
-        query_str :='select orm_message.text_mes, count(orm_message.time_send)
-                        from orm_message ';
+    query_str :='select ORM_BOARD.time_send, count(ORM_BOARD.user_phone)
+                        from ORM_BOARD ';
 
         -- optional part where
-            if text_mes is not null then
-             query_str:= query_str||' where trim(orm_message.text_mes) = trim('''||text_mes||''') ''';
+            if time_send is not null then
+             query_str:= query_str||' where trim(ORM_BOARD.time_send) = trim('''||skill_name||''') ';
             end if;
         -- end optional part
 
-        query_str := query_str||' group by (orm_message.time_send';
+        query_str := query_str||' group by ORM_BOARD.time_send';
 
 
 
-        OPEN orm_message FOR query_str;
+        OPEN message_cursor FOR query_str;
         LOOP
-            FETCH text_mes into text_data;
-            exit when (text_mes %NOTFOUND);
+            FETCH message_cursorr into cursor_data;
+            exit when (message_cursor %NOTFOUND);
 
-            PIPE ROW (text_data);
+            PIPE ROW (cursor_data);
 
         END LOOP;
 
 
-    END GetSkillData;
+    END GetGetMessageDataData;
 
-END orm_message;
+END orm_board;
