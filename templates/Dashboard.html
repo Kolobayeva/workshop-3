@@ -42,33 +42,7 @@
 <div id="chart">
 
 <script>
- $(document).ready(function () {
- $("#chart").shieldChart({
- theme: "light",
- primaryHeader: {
- text: "how many messages the user sent during each day"
- },
- exportOptions: {
- image: false,
- print: false
- },
- axisX: {
- categoricalValues: ["1", "2", "3", "4", "5"]
- },
- tooltipSettings: {
- chartBound: true,
- axisMarkers: {
- enabled: true,
- mode: 'xy'
- } 
- },
- dataSeries: [{
- seriesType: 'line',
- collectionAlias: "number of messages:",
- data: [100, 320, 453, 234, 553]
- }]
- });
- });
+ 
  </script>
  
 
@@ -77,23 +51,7 @@
 </div><!-- /.container -->
 <script src="https://www.google.com/jsapi"></script>
   <script>
-   google.load("visualization", "1", {packages:["corechart"]});
-   google.setOnLoadCallback(drawChart);
-   function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-     ['Газ', 'Объём'],
-     ['Yes',     78.09],
-     ['Not', 20.95],
-     ['Delete',    0.96],
-    ]);
-    var options = {
-     title: 'how many people added messages to the board',
-     is3D: true,
-     pieResidueSliceLabel: 'Остальное'
-    };
-    var chart = new google.visualization.PieChart(document.getElementById('air'));
-     chart.draw(data, options);
-   }
+   
   </script>
  </head>
  <body>
