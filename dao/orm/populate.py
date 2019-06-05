@@ -15,39 +15,39 @@ session.query(ormBoard).delete()
 
 # populate database with new rows
 
+Katia = ormUser( user_name="Katia",
+               user_email='kat@gmail.com',
+               user_phone='0672867955',
+               )
+
+
+
 Bob = ormUser( user_name="Bob",
                user_email='bob@gmail.com',
-               user_phone='0966815412',
+               user_phone='0978612345',
+               )
+
+
+Jack = ormUser( user_name="Jack",
+               user_email='	ze2019@gmail.com',
+               user_phone='0685896954',
                )
 
 
 
-Boba = ormUser( user_name="Bob",
-               user_email='bob@gmail.com',
-               user_phone='0966815412',
-               )
-
-
-Boban = ormUser( user_name="Bob",
-               user_email='bob@gmail.com',
-               user_phone='0966815412',
-               )
-
-
-
-BobM = ormMessage(text_mes='Message1')
-BobaM = ormMessage(text_mes='Message2')
-BobanM = ormMessage(text_mes='Message22')
+KatiaM = ormMessage(text_mes='Message1')
+BobM = ormMessage(text_mes='Message2')
+JackM = ormMessage(text_mes='Message3')
 
 # create relations
+Katia.orm_message.append(KatiaM)
 Bob.orm_message.append(BobM)
-Boba.orm_message.append(BobaM)
 
-Boban.orm_message.append(BobanM)
+Jack.orm_message.append(JackM)
 
 
 
 # insert into database
-session.add_all([BobM,BobaM,BobanM,Boba,Bob,Boban])
+session.add_all([KatiaM,BobM,JackM,Katia,Bob,Jack])
 
 session.commit()
